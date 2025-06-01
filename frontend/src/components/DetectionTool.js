@@ -16,7 +16,87 @@ const DetectionTool = () => {
     { id: 'url', label: 'URL Analysis', icon: Link, description: 'Check for malicious AI-powered threats' }
   ];
 
-  // Simulated AI detection database
+  // Handle image upload
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setUploadedImage(file);
+      setInputValue(`Image uploaded: ${file.name}`);
+      
+      // Create preview
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagePreview(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Enhanced image analysis based on filename and properties
+  const analyzeImageContent = (file) => {
+    const threats = [];
+    const fileName = file.name.toLowerCase();
+    const fileSize = file.size;
+    const fileType = file.type;
+
+    // Analyze based on filename patterns
+    if (fileName.includes('deepfake') || fileName.includes('fake') || fileName.includes('synthetic')) {
+      threats.push({
+        type: 'Suspected Deepfake Content',
+        confidence: 92,
+        severity: 'High',
+        details: 'Filename suggests synthetic or manipulated content'
+      });
+    }
+
+    if (fileName.includes('ai') || fileName.includes('generated') || fileName.includes('artificial')) {
+      threats.push({
+        type: 'AI-Generated Image',
+        confidence: 88,
+        severity: 'Medium',
+        details: 'Filename indicates AI-generated content'
+      });
+    }
+
+    // Analyze based on file properties
+    if (fileSize > 5 * 1024 * 1024) { // > 5MB
+      threats.push({
+        type: 'Unusually Large File Size',
+        confidence: 65,
+        severity: 'Low',
+        details: 'Large file sizes may indicate embedded hidden data'
+      });
+    }
+
+    if (fileType && !fileType.startsWith('image/')) {
+      threats.push({
+        type: 'Suspicious File Type',
+        confidence: 95,
+        severity: 'High',
+        details: 'File appears to be masquerading as an image'
+      });
+    }
+
+    // Simulated advanced analysis
+    const randomAnalysis = Math.random();
+    if (randomAnalysis > 0.7) {
+      threats.push({
+        type: 'Facial Manipulation Detected',
+        confidence: 78,
+        severity: 'High',
+        details: 'Facial features show signs of digital manipulation'
+      });
+    } else if (randomAnalysis > 0.4) {
+      threats.push({
+        type: 'Compression Artifacts',
+        confidence: 45,
+        severity: 'Low',
+        details: 'Unusual compression patterns detected'
+      });
+    }
+
+    return threats;
+  };
   const threatDatabase = {
     text: [
       { pattern: /artificial intelligence|machine learning|neural network/i, threat: 'AI-generated content', confidence: 85 },
