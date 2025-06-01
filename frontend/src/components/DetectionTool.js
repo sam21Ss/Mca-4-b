@@ -375,6 +375,34 @@ const DetectionTool = () => {
                   <span className="ml-2 text-sm">({analysisResult.confidence}% confidence)</span>
                 </div>
 
+                {/* Image Information */}
+                {analysisResult.imageInfo && (
+                  <div className="mb-6 p-4 bg-slate-800/50 rounded-lg border border-slate-600">
+                    <h4 className="text-lg font-medium text-white mb-3 flex items-center">
+                      <Image className="w-5 h-5 text-cyan-400 mr-2" />
+                      Image Analysis Details
+                    </h4>
+                    <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div>
+                        <span className="text-slate-400">Filename:</span>
+                        <div className="text-white font-medium">{analysisResult.imageInfo.name}</div>
+                      </div>
+                      <div>
+                        <span className="text-slate-400">File Size:</span>
+                        <div className="text-white font-medium">{analysisResult.imageInfo.size}</div>
+                      </div>
+                      <div>
+                        <span className="text-slate-400">File Type:</span>
+                        <div className="text-white font-medium">{analysisResult.imageInfo.type}</div>
+                      </div>
+                      <div>
+                        <span className="text-slate-400">Last Modified:</span>
+                        <div className="text-white font-medium">{analysisResult.imageInfo.lastModified}</div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 {/* Threats Found */}
                 {analysisResult.threats.length > 0 ? (
                   <div className="space-y-4">
