@@ -120,10 +120,20 @@ const DetectionTool = () => {
       input: inputValue,
       threats: [],
       overallRisk: 'Low',
-      confidence: 0
+      confidence: 0,
+      imageInfo: null
     };
 
-    if (activeTab === 'text' || activeTab === 'url') {
+    if (activeTab === 'image' && uploadedImage) {
+      // Analyze the uploaded image
+      result.threats = analyzeImageContent(uploadedImage);
+      result.imageInfo = {
+        name: uploadedImage.name,
+        size: (uploadedImage.size / 1024 / 1024).toFixed(2) + ' MB',
+        type: uploadedImage.type,
+        lastModified: new Date(uploadedImage.lastModified).toLocaleDateString()
+      };
+    } else if (activeTab === 'text' || activeTab === 'url') {
       const patterns = threatDatabase[activeTab] || threatDatabase.text;
       
       patterns.forEach(pattern => {
@@ -131,7 +141,8 @@ const DetectionTool = () => {
           result.threats.push({
             type: pattern.threat,
             confidence: pattern.confidence,
-            severity: pattern.confidence > 80 ? 'High' : pattern.confidence > 60 ? 'Medium' : 'Low'
+            severity: pattern.confidence > 80 ? 'High' : pattern.confidence > 60 ? 'Medium' : 'Low',
+            details: 'Pattern matching detected suspicious content'
           });
         }
       });
