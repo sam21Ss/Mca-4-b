@@ -289,16 +289,20 @@ const DetectionTool = () => {
                     )}
                     
                     {/* Upload Area */}
-                    <div className="border-2 border-dashed border-slate-600 rounded-xl p-12 text-center hover:border-cyan-400/50 transition-colors duration-300 cursor-pointer">
+                    <div 
+                      className="relative border-2 border-dashed border-slate-600 rounded-xl p-12 text-center hover:border-cyan-400/50 transition-colors duration-300 cursor-pointer"
+                      onClick={() => document.getElementById('image-upload-input').click()}
+                    >
                       <Upload className="w-12 h-12 text-slate-400 mx-auto mb-4" />
                       <p className="text-slate-300 mb-2">
                         {imagePreview ? 'Click to upload a different image' : 'Drag and drop an image here, or click to browse'}
                       </p>
                       <p className="text-slate-400 text-sm">Supports JPG, PNG, GIF up to 10MB</p>
                       <input
+                        id="image-upload-input"
                         type="file"
                         accept="image/*"
-                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                        className="hidden"
                         onChange={handleImageUpload}
                       />
                     </div>
