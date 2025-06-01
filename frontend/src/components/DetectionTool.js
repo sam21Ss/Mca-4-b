@@ -7,6 +7,8 @@ const DetectionTool = () => {
   const [analysisResult, setAnalysisResult] = useState(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const [uploadedImage, setUploadedImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
   const tabs = [
     { id: 'text', label: 'Text Analysis', icon: FileText, description: 'Detect AI-generated content and suspicious patterns' },
