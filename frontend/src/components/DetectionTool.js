@@ -121,6 +121,7 @@ const DetectionTool = () => {
               return (
                 <motion.button
                   key={tab.id}
+                  data-tab={tab.id}
                   onClick={() => {
                     setActiveTab(tab.id);
                     setAnalysisResult(null);
