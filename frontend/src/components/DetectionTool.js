@@ -267,20 +267,48 @@ const DetectionTool = () => {
                     <label className="block text-white font-medium mb-3">
                       Upload image for deepfake detection:
                     </label>
-                    <div className="border-2 border-dashed border-slate-600 rounded-xl p-12 text-center hover:border-cyan-400/50 transition-colors duration-300">
+                    
+                    {/* Image Preview */}
+                    {imagePreview && (
+                      <div className="mb-6">
+                        <div className="relative bg-slate-700/30 rounded-xl p-4 border border-slate-600">
+                          <img 
+                            src={imagePreview} 
+                            alt="Uploaded for analysis" 
+                            className="max-w-full max-h-64 mx-auto rounded-lg"
+                          />
+                          <div className="mt-3 text-sm text-slate-300">
+                            <p><span className="text-cyan-400">File:</span> {uploadedImage?.name}</p>
+                            <p><span className="text-cyan-400">Size:</span> {(uploadedImage?.size / 1024 / 1024).toFixed(2)} MB</p>
+                            <p><span className="text-cyan-400">Type:</span> {uploadedImage?.type}</p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {/* Upload Area */}
+                    <div className="border-2 border-dashed border-slate-600 rounded-xl p-12 text-center hover:border-cyan-400/50 transition-colors duration-300 cursor-pointer">
                       <Upload className="w-12 h-12 text-slate-400 mx-auto mb-4" />
-                      <p className="text-slate-300 mb-2">Drag and drop an image here, or click to browse</p>
+                      <p className="text-slate-300 mb-2">
+                        {imagePreview ? 'Click to upload a different image' : 'Drag and drop an image here, or click to browse'}
+                      </p>
                       <p className="text-slate-400 text-sm">Supports JPG, PNG, GIF up to 10MB</p>
                       <input
                         type="file"
                         accept="image/*"
-                        className="hidden"
-                        onChange={(e) => {
-                          if (e.target.files[0]) {
-                            setInputValue(`Image uploaded: ${e.target.files[0].name}`);
-                          }
-                        }}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                        onChange={handleImageUpload}
                       />
+                    </div>
+                    
+                    {/* Image Analysis Tips */}
+                    <div className="mt-4 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+                      <h4 className="text-blue-400 font-medium mb-2">Analysis Tips:</h4>
+                      <ul className="text-sm text-slate-300 space-y-1">
+                        <li>• Upload images with faces for deepfake detection</li>
+                        <li>• AI-generated images often have subtle inconsistencies</li>
+                        <li>• Try uploading images with names containing "fake", "ai", "deepfake" for demo</li>
+                      </ul>
                     </div>
                   </div>
                 )}
