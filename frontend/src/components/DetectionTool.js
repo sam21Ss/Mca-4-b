@@ -415,9 +415,14 @@ const DetectionTool = () => {
                             {threat.severity}
                           </span>
                         </div>
-                        <div className="text-slate-400 text-sm">
+                        <div className="text-slate-400 text-sm mb-2">
                           Confidence: {threat.confidence}%
                         </div>
+                        {threat.details && (
+                          <div className="text-slate-300 text-sm bg-slate-700/50 p-2 rounded">
+                            <strong>Details:</strong> {threat.details}
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
