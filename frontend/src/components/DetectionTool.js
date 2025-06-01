@@ -219,6 +219,8 @@ const DetectionTool = () => {
                     setActiveTab(tab.id);
                     setAnalysisResult(null);
                     setInputValue('');
+                    setUploadedImage(null);
+                    setImagePreview(null);
                   }}
                   className={`flex items-center space-x-3 px-6 py-4 rounded-xl transition-all duration-300 ${
                     activeTab === tab.id
