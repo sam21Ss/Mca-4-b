@@ -88,7 +88,7 @@ const DetectionTool = () => {
   };
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden" id="detection-tool">
       {/* Background */}
       <div 
         className="absolute inset-0 bg-cover bg-center opacity-5"
