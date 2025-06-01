@@ -213,6 +213,7 @@ const DetectionTool = () => {
             <motion.button
               onClick={analyzeInput}
               disabled={!inputValue.trim() || isAnalyzing}
+              data-analyze="true"
               className="w-full bg-gradient-to-r from-blue-500 to-cyan-400 text-white py-4 rounded-xl font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300"
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.99 }}
